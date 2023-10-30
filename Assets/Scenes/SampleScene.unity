@@ -353,6 +353,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ba3f0eb86ccb3cf43846f62201539128, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  start: {fileID: 5013208098200117705, guid: 54710121b0b294b48a549b88d036ad3c, type: 3}
+  end: {fileID: -7410247702711379946, guid: 147a072b23329284cbff9de3d7107ff3, type: 3}
   cell: {fileID: 5860302291760459315, guid: d7382e93e30aae149a4edfb8fd9aed95, type: 3}
   MazeWidth: 20
   MazeDepth: 20

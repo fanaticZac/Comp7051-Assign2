@@ -6,6 +6,12 @@ using UnityEngine;
 public class MazeGenerator : MonoBehaviour
 {
     [SerializeField]
+    private StartCell start;
+
+    [SerializeField]
+    private EndCell end;
+
+    [SerializeField]
     private MazeCell cell;
 
     [SerializeField]
@@ -29,12 +35,41 @@ public class MazeGenerator : MonoBehaviour
             }
         }
 
-        yield return GenerateMaze(null, MazeGrid[0, 0]);
+        int RandomCorner = Random.Range(0, 3);
+        if (RandomCorner == 0)
+        {
+            Destroy(MazeGrid[0, 0].gameObject);
+            Destroy(MazeGrid[MazeWidth - 1, MazeDepth - 1].gameObject);
+            MazeGrid[0, 0] = Instantiate(start, new Vector3(0, 0, 0), Quaternion.identity);
+            MazeGrid[MazeWidth - 1, MazeDepth - 1] = Instantiate(end, new Vector3(MazeWidth - 1, 0, MazeDepth  - 1), Quaternion.identity);
+        }
+        else if (RandomCorner == 1)
+        {
+            Destroy(MazeGrid[0, MazeDepth - 1].gameObject);
+            Destroy(MazeGrid[MazeWidth - 1, 0].gameObject);
+            MazeGrid[0, MazeDepth - 1] = Instantiate(start, new Vector3(0, 0, MazeDepth - 1), Quaternion.identity);
+            MazeGrid[MazeWidth - 1, 0] = Instantiate(end, new Vector3(MazeWidth - 1, 0, 0), Quaternion.identity);
+        }
+        else if (RandomCorner == 2)
+        {
+            Destroy(MazeGrid[0, MazeDepth - 1].gameObject);
+            Destroy(MazeGrid[MazeWidth - 1, 0].gameObject);
+            MazeGrid[MazeWidth - 1, 0] = Instantiate(start, new Vector3(MazeWidth - 1, 0, 0), Quaternion.identity);
+            MazeGrid[0, MazeDepth - 1] = Instantiate(end, new Vector3(0, 0, MazeDepth - 1), Quaternion.identity);
+        }
+        else if (RandomCorner == 3)
+        {
+            Destroy(MazeGrid[0, 0].gameObject);
+            Destroy(MazeGrid[MazeWidth - 1, MazeDepth - 1].gameObject);
+            MazeGrid[MazeWidth - 1, MazeDepth - 1] = Instantiate(start, new Vector3(MazeWidth - 1, 0, MazeDepth - 1), Quaternion.identity);
+            MazeGrid[0, 0] = Instantiate(end, new Vector3(0, 0, 0), Quaternion.identity);
+        }
+
+        yield return GenerateMaze(null, start);
     }
 
     private IEnumerator GenerateMaze(MazeCell previousCell, MazeCell currentCell)
     {
-        Debug.Log(currentCell.transform.position);
         currentCell.Visit();
         ClearWalls(previousCell, currentCell);
 
