@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class CharacterWalkingAI : MonoBehaviour
 {
-    public float speed = .1f;
+    public float speed = 1f;
     public float turnAngle = 120.0f;
     Animator animator;
     public float backupDistance = .5f; 
@@ -47,10 +47,13 @@ public class CharacterWalkingAI : MonoBehaviour
 
     void OnCollisionEnter(Collision collision)
     {
-        Debug.Log("Collision detected with: " + collision.gameObject.name);
+        if (collision.collider.name != "Plane")
+        {
+            Debug.Log("Collision detected with: " + collision.gameObject.name);
 
-        isColliding = true;
+            isColliding = true;
 
-        backupPosition = transform.position;
+            backupPosition = transform.position;
+        }
     }
 }

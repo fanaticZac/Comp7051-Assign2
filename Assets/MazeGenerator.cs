@@ -25,6 +25,9 @@ public class MazeGenerator : MonoBehaviour
     // Start is called before the first frame update
     IEnumerator Start()
     {
+        GameObject enemy = GameObject.Find("GuyWalkingAround");
+        GameObject player = GameObject.Find("Sci-fi_character_unity_red Variant");
+        enemy.SetActive(false);
         MazeGrid = new MazeCell[MazeWidth, MazeDepth];
 
         for (int i = 0; i < MazeWidth; i++)
@@ -66,6 +69,21 @@ public class MazeGenerator : MonoBehaviour
         }
 
         yield return GenerateMaze(null, start);
+
+        for (int k = 0; k < MazeWidth; k++)
+        {
+            for (int l = 0; l < MazeDepth; l++)
+            {
+                RemoveOverlappingWalls(MazeGrid[k, l]);
+            }
+        }
+
+        player.transform.position = start.transform.position;
+
+        enemy.transform.position = MazeGrid[MazeWidth / 2, MazeDepth / 2].transform.position;
+
+        enemy.SetActive(true);
+
     }
 
     private IEnumerator GenerateMaze(MazeCell previousCell, MazeCell currentCell)
@@ -173,6 +191,47 @@ public class MazeGenerator : MonoBehaviour
                 previousCell.ClearBackWall();
                 currentCell.ClearFrontWall();
                 return;
+            }
+        }
+    }
+
+    private void RemoveOverlappingWalls(MazeCell currentCell)
+    {
+        int x = (int)currentCell.transform.position.x;
+        int z = (int)currentCell.transform.position.z;
+        if (x + 1 < MazeWidth)
+        {
+            var cellToRight = MazeGrid[x + 1, z];
+            if (cellToRight.CheckLeftWall() && currentCell.CheckRightWall())
+            {
+                cellToRight.ClearLeftWall();
+            }
+        }
+
+        if (x - 1 >= 0)
+        {
+            var cellToLeft = MazeGrid[x - 1, z];
+            if (cellToLeft.CheckRightWall() && currentCell.CheckLeftWall())
+            {
+                cellToLeft.ClearRightWall();
+            }
+        }
+
+        if (z + 1 < MazeDepth)
+        {
+            var cellToFront = MazeGrid[x, z + 1];
+            if (cellToFront.CheckBackWall() && currentCell.CheckFrontWall())
+            {
+                cellToFront.ClearBackWall();
+            }
+        }
+
+        if (z - 1 >= 0)
+        {
+            var cellToBack = MazeGrid[x, z - 1];
+            if (cellToBack.CheckFrontWall() && currentCell.CheckBackWall())
+            {
+                cellToBack.ClearFrontWall();
             }
         }
     }
