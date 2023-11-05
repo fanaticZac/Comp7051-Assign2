@@ -11,10 +11,16 @@ public class CharacterLocomotion : MonoBehaviour
     Animator animator;
     Vector2 input;
     bool IsSprinting = false;
-    // Start is called before the first frame update
+    // Start is called before the first frame update  
+    public float boundaryXMin = 0f;
+    public float boundaryXMax = 4.4f;
+    public float boundaryZMin = 0f;
+    public float boundaryZMax = 4.4f;
+
     void Start()
     {
         animator = GetComponent<Animator>();
+        
     }
 
     // Update is called once per frame
@@ -24,15 +30,21 @@ public class CharacterLocomotion : MonoBehaviour
         input.x = Input.GetAxis("Horizontal");
         input.y = Input.GetAxis("Vertical");
 
+        Vector3 currentPosition = transform.position;
+        // locks postion within a range
+        currentPosition.x = Mathf.Clamp(currentPosition.x, boundaryXMin, boundaryXMax);
+        currentPosition.z = Mathf.Clamp(currentPosition.z, boundaryZMin, boundaryZMax);
+        transform.position = currentPosition;
+
         animator.SetFloat("InputX", input.x);
         animator.SetFloat("InputY", input.y);
 
-        if(Input.GetKeyDown(KeyCode.LeftShift))
-        {
-            IsSprinting = !IsSprinting;
+        // if(Input.GetKeyDown(KeyCode.LeftShift))
+        // {
+        //     IsSprinting = !IsSprinting;
 
-            animator.SetLayerWeight(1, IsSprinting ? 0 : 1); //lower aiming animation when running. Aimlayer is on layer 1
-            animator.SetBool("IsSprinting", IsSprinting);
-        }
+        //     animator.SetLayerWeight(1, IsSprinting ? 0 : 1); //lower aiming animation when running. Aimlayer is on layer 1
+        //     animator.SetBool("IsSprinting", IsSprinting);
+        // }
     }
 }

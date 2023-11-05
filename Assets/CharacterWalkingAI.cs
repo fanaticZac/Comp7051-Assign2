@@ -4,56 +4,54 @@ using UnityEngine;
 
 public class CharacterWalkingAI : MonoBehaviour
 {
-    public float speed = 1f;
-    public float turnAngle = 120.0f;
-    Animator animator;
-    public float backupDistance = .5f; 
-    private bool isColliding = false;
-    private Vector3 backupPosition;
+    private float speed = 1f;
+    private float minTurnAngle = 15.0f;
+    private float maxTurnAngle = 45.0f;
+    private float raycastDistance = 1f;
+    private Animator animator;
+    public float boundaryXMin = 0f;
+    public float boundaryXMax = 4.4f;
+    public float boundaryZMin = 0f;
+    public float boundaryZMax = 4.4f;
+
     void Start()
     {
         animator = GetComponent<Animator>();
     }
 
-    // Update is called once per frame
-    void FixedUpdate()
+    void Update()
     {
-        if (!isColliding)
-        {
-            // Move forward
-            transform.Translate(Vector3.forward * speed * Time.deltaTime);
-            animator.SetFloat("InputX", 1.0f); 
-            animator.SetFloat("InputY", 0.0f);
+        Ray ray = new Ray(transform.position, transform.forward);
+        RaycastHit hit;
+
+        if (IsBoundry()){
+            Vector3 currentPosition = transform.position;
+            // locks postion within a range
+            currentPosition.x = Mathf.Clamp(currentPosition.x, boundaryXMin, boundaryXMax);
+            currentPosition.z = Mathf.Clamp(currentPosition.z, boundaryZMin, boundaryZMax);
+            transform.position = currentPosition;
+
+            float turnDirection = Random.Range(0, 2) == 0 ? -1f : 1f; 
+            float randomTurnAngle = Random.Range(120, 240);
+            transform.Rotate(0, turnDirection * randomTurnAngle, 0);
         }
+        else if (Physics.Raycast(ray, out hit, raycastDistance))
+        {
+            float turnDirection = Random.Range(0, 2) == 0 ? -1f : 1f; 
+            float randomTurnAngle = Random.Range(minTurnAngle, maxTurnAngle);
+            transform.Rotate(0, turnDirection * randomTurnAngle, 0);
+        } 
         else
         {
-            // Back up
-            transform.Translate(Vector3.back * speed * Time.deltaTime);
-
-            // Check if the character has backed up sufficiently
-            if (Vector3.Distance(transform.position, backupPosition) >= backupDistance)
-            {
-                isColliding = false;
-                transform.Rotate(0, turnAngle, 0);
-            }
+            transform.Translate(Vector3.forward * speed * Time.deltaTime);
+            animator.SetFloat("InputX", speed);
+            animator.SetFloat("InputY", 0.0f);
         }
-
-        // input.x = Input.GetAxis("Horizontal");
-        // input.y = Input.GetAxis("Vertical");
-
-        // animator.SetFloat("InputX", input.x);
-        // animator.SetFloat("InputY", input.y);
     }
 
-    void OnCollisionEnter(Collision collision)
+    bool IsBoundry()
     {
-        if (collision.collider.name != "Plane")
-        {
-            Debug.Log("Collision detected with: " + collision.gameObject.name);
-
-            isColliding = true;
-
-            backupPosition = transform.position;
-        }
+        Vector3 currentPosition = transform.position;
+        return currentPosition.x < boundaryXMin || currentPosition.x > boundaryXMax || currentPosition.z < boundaryZMin || currentPosition.z > boundaryZMax;
     }
 }

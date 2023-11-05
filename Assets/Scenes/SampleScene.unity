@@ -208,9 +208,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3cd0b7f5b5c61914bb4d59d3ee7cfe10, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 2
-  turnAngle: 15
-  backupDistance: 0.5
+  boundaryXMin: 0
+  boundaryXMax: 4.4
+  boundaryZMin: 0
+  boundaryZMax: 4.4
 --- !u!136 &145980119
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -692,11 +693,15 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1235169588}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f08cce11fc45854b2b32b37d4718959f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  boundaryXMin: 0
+  boundaryXMax: 4.4
+  boundaryZMin: 0
+  boundaryZMax: 4.4
 --- !u!114 &1235169592
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -758,7 +763,7 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 112
+  m_Constraints: 116
   m_CollisionDetection: 0
 --- !u!114 &1235169596
 MonoBehaviour:
@@ -773,7 +778,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   turnSpeed: 15
-  speed: 3
+  speed: 1
 --- !u!1001 &1286087370
 PrefabInstance:
   m_ObjectHideFlags: 0
