@@ -20,13 +20,25 @@ public class MazeGenerator : MonoBehaviour
     [SerializeField]
     private int MazeDepth;
 
+    [SerializeField]
+    private GameObject enemy;
+
+    [SerializeField]
+    private GameObject player;
+
+    [SerializeField]
+    private GameObject loadText;
+
+    [SerializeField]
+    private GameObject winText;
+
     private MazeCell[,] MazeGrid;
+
+    private int RandomCorner;
 
     // Start is called before the first frame update
     IEnumerator Start()
     {
-        GameObject enemy = GameObject.Find("GuyWalkingAround");
-        GameObject player = GameObject.Find("Sci-fi_character_unity_red Variant");
         enemy.SetActive(false);
         MazeGrid = new MazeCell[MazeWidth, MazeDepth];
 
@@ -38,13 +50,14 @@ public class MazeGenerator : MonoBehaviour
             }
         }
 
-        int RandomCorner = Random.Range(0, 3);
+        RandomCorner = Random.Range(0, 3);
         if (RandomCorner == 0)
         {
             Destroy(MazeGrid[0, 0].gameObject);
             Destroy(MazeGrid[MazeWidth - 1, MazeDepth - 1].gameObject);
             MazeGrid[0, 0] = Instantiate(start, new Vector3(0, 0, 0), Quaternion.identity);
             MazeGrid[MazeWidth - 1, MazeDepth - 1] = Instantiate(end, new Vector3(MazeWidth - 1, 0, MazeDepth  - 1), Quaternion.identity);
+            end.transform.position = new Vector3(MazeWidth - 1, 0, MazeDepth - 1);
         }
         else if (RandomCorner == 1)
         {
@@ -52,6 +65,8 @@ public class MazeGenerator : MonoBehaviour
             Destroy(MazeGrid[MazeWidth - 1, 0].gameObject);
             MazeGrid[0, MazeDepth - 1] = Instantiate(start, new Vector3(0, 0, MazeDepth - 1), Quaternion.identity);
             MazeGrid[MazeWidth - 1, 0] = Instantiate(end, new Vector3(MazeWidth - 1, 0, 0), Quaternion.identity);
+            start.transform.position = new Vector3(0, 0, MazeDepth - 1);
+            end.transform.position = new Vector3(MazeWidth - 1, 0, 0);
         }
         else if (RandomCorner == 2)
         {
@@ -59,6 +74,8 @@ public class MazeGenerator : MonoBehaviour
             Destroy(MazeGrid[MazeWidth - 1, 0].gameObject);
             MazeGrid[MazeWidth - 1, 0] = Instantiate(start, new Vector3(MazeWidth - 1, 0, 0), Quaternion.identity);
             MazeGrid[0, MazeDepth - 1] = Instantiate(end, new Vector3(0, 0, MazeDepth - 1), Quaternion.identity);
+            start.transform.position = new Vector3(MazeWidth - 1, 0, 0);
+            end.transform.position = new Vector3(0, 0, MazeDepth - 1);
         }
         else if (RandomCorner == 3)
         {
@@ -66,6 +83,7 @@ public class MazeGenerator : MonoBehaviour
             Destroy(MazeGrid[MazeWidth - 1, MazeDepth - 1].gameObject);
             MazeGrid[MazeWidth - 1, MazeDepth - 1] = Instantiate(start, new Vector3(MazeWidth - 1, 0, MazeDepth - 1), Quaternion.identity);
             MazeGrid[0, 0] = Instantiate(end, new Vector3(0, 0, 0), Quaternion.identity);
+            start.transform.position = new Vector3(MazeWidth - 1, 0, MazeDepth - 1);
         }
 
         yield return GenerateMaze(null, start);
@@ -83,6 +101,8 @@ public class MazeGenerator : MonoBehaviour
         enemy.transform.position = MazeGrid[MazeWidth / 2, MazeDepth / 2].transform.position;
 
         enemy.SetActive(true);
+
+        loadText.SetActive(false);
 
     }
 
@@ -239,6 +259,40 @@ public class MazeGenerator : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.Home))
+        {
+            player.transform.position = start.transform.position;
+            enemy.transform.position = MazeGrid[MazeWidth / 2, MazeDepth / 2].transform.position;
+            winText.SetActive(false);
+        }
 
+        if (RandomCorner == 0)
+        {
+            if (player.transform.position.x > MazeWidth - 1.6f && player.transform.position.z > MazeDepth - 1.6f)
+            {
+                winText.SetActive(true);
+            }
+        }
+        else if (RandomCorner == 1)
+        {
+            if (player.transform.position.x > MazeWidth - 1.6f && player.transform.position.z < 0.6f)
+            {
+                winText.SetActive(true);
+            }
+        }
+        else if (RandomCorner == 2)
+        {
+            if (player.transform.position.x < 0.6f && player.transform.position.z > MazeDepth - 1.6f)
+            {
+                winText.SetActive(true);
+            }
+        }
+        else if (RandomCorner == 3)
+        {
+            if (player.transform.position.x < 0.6f && player.transform.position.z < 0.6f)
+            {
+                winText.SetActive(true);
+            }
+        }
     }
 }
