@@ -32,6 +32,15 @@ public class MazeGenerator : MonoBehaviour
     [SerializeField]
     private GameObject winText;
 
+    [SerializeField]
+    private GameObject saveButton;
+
+    [SerializeField]
+    private GameObject playerPosition;
+
+    [SerializeField]
+    private GameObject enemyPosition;
+
     private MazeCell[,] MazeGrid;
 
     private int RandomCorner;
@@ -98,12 +107,21 @@ public class MazeGenerator : MonoBehaviour
 
         player.transform.position = start.transform.position;
 
+        GameController.gCtrl.SetPlayerPosition(player.transform.position.x, player.transform.position.y, player.transform.position.z);
+
         enemy.transform.position = MazeGrid[MazeWidth / 2, MazeDepth / 2].transform.position;
+
+        GameController.gCtrl.SetEnemyPosition(enemy.transform.position.x, enemy.transform.position.y, enemy.transform.position.z);
 
         enemy.SetActive(true);
 
         loadText.SetActive(false);
 
+        saveButton.SetActive(true);
+
+        playerPosition.SetActive(true);
+
+        enemyPosition.SetActive(true);
     }
 
     private IEnumerator GenerateMaze(MazeCell previousCell, MazeCell currentCell)
