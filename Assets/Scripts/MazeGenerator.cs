@@ -291,7 +291,7 @@ public class MazeGenerator : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.LeftControl))
         {
             Renderer renderer = floor.GetComponent<Renderer>();
-            if (night && !fog)
+            if (night && !fog && audioSource != null)
             {
                 renderer.material = FloorDayMaterial;
                 for (int i = 0; i < MazeWidth; i++)
@@ -305,7 +305,7 @@ public class MazeGenerator : MonoBehaviour
                 audioSource.PlayOneShot(dayAmbience);
                 night = false;
             }
-            else if (!night && !fog)
+            else if (!night && !fog && audioSource != null)
             {
                 renderer.material = FloorNightMaterial;
                 for (int i = 0; i < MazeWidth; i++)
@@ -319,7 +319,7 @@ public class MazeGenerator : MonoBehaviour
                 audioSource.PlayOneShot(nightAmbience);
                 night = true;
             }
-            else if (night && fog)
+            else if (night && fog && audioSource != null)
             {
                 renderer.material = FloorDayMaterial;
                 for (int i = 0; i < MazeWidth; i++)
@@ -334,7 +334,7 @@ public class MazeGenerator : MonoBehaviour
                 audioSource.PlayOneShot(dayAmbience);
                 night = false;
             }
-            else if (!night && fog)
+            else if (!night && fog && audioSource != null)
             {
                 renderer.material = FloorDayMaterial;
                 for (int i = 0; i < MazeWidth; i++)
@@ -353,7 +353,7 @@ public class MazeGenerator : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.LeftAlt))
         {
-            if (fog)
+            if (fog && audioSource != null)
             {
                 for (int i = 0; i < MazeWidth; i++)
                 {
@@ -365,7 +365,7 @@ public class MazeGenerator : MonoBehaviour
                 audioSource.volume = audioSource.volume * 2f;
                 fog = false;
             }
-            else if (night && !fog)
+            else if (night && !fog && audioSource != null)
             {
                 for (int i = 0; i < MazeWidth; i++)
                 {
@@ -377,7 +377,7 @@ public class MazeGenerator : MonoBehaviour
                 audioSource.volume = audioSource.volume * 0.5f;
                 fog = true;
             }
-            else if (!night && !fog)
+            else if (!night && !fog && audioSource != null)
             {
                 for (int i = 0; i < MazeWidth; i++)
                 {
@@ -391,7 +391,7 @@ public class MazeGenerator : MonoBehaviour
             }
         }
 
-        if (Input.GetKeyDown(KeyCode.Q))
+        if (Input.GetKeyDown(KeyCode.E))
         {
             if (audio)
             {
@@ -400,20 +400,20 @@ public class MazeGenerator : MonoBehaviour
             }
             else
             {
-                if (night && !fog)
+                if (night && !fog && audioSource != null)
                 {
                     audioSource.PlayOneShot(nightAmbience);
                 }
-                else if (!night && !fog)
+                else if (!night && !fog && audioSource != null)
                 {
                     audioSource.PlayOneShot(dayAmbience);
                 }
-                else if (night && fog)
+                else if (night && fog && audioSource != null)
                 {
                     audioSource.PlayOneShot(nightAmbience);
                     audioSource.volume = audioSource.volume * 0.5f;
                 }
-                else if (!night && fog)
+                else if (!night && fog && audioSource != null)
                 {
                     audioSource.PlayOneShot(dayAmbience);
                     audioSource.volume = audioSource.volume * 0.5f;
@@ -451,6 +451,9 @@ public class MazeGenerator : MonoBehaviour
             }
         }
 
-        audioSource.volume = 1 - ((player.transform.position.x + player.transform.position.z) - (enemy.transform.position.x + enemy.transform.position.z))/10f;
+        if (audioSource != null)
+        {
+            audioSource.volume = 1 - ((player.transform.position.x + player.transform.position.z) - (enemy.transform.position.x + enemy.transform.position.z)) / 10f;
+        }
     }
 }
