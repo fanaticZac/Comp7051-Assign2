@@ -53,6 +53,24 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""throwAction"",
+                    ""type"": ""Button"",
+                    ""id"": ""744c0f7b-480a-4c2a-a303-34b9fb8616dd"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""flashLight"",
+                    ""type"": ""Button"",
+                    ""id"": ""1e2157e4-43bf-4b42-9827-cf3d8eda69a0"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -165,6 +183,247 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
                     ""action"": ""walls"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""f1890221-3ecb-4a3d-bc9b-a633929de6cc"",
+                    ""path"": ""<Gamepad>/buttonNorth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""throwAction"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""5b58cf36-b94e-4d57-ad9a-0b65a1a04b0b"",
+                    ""path"": ""<Keyboard>/t"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""throwAction"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""7717c0c4-70f9-459a-b2ec-78288c1b3649"",
+                    ""path"": ""<Keyboard>/f"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""flashLight"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""66600782-c37b-4c22-9956-f4be7ae6337c"",
+                    ""path"": ""<Gamepad>/buttonWest"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""flashLight"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
+        },
+        {
+            ""name"": ""PlayerLeft"",
+            ""id"": ""0e64591b-7c29-42a6-9891-ce55e449c136"",
+            ""actions"": [
+                {
+                    ""name"": ""Movement"",
+                    ""type"": ""Value"",
+                    ""id"": ""b67e9338-975f-40af-b1ce-75f63139b1ae"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Quit"",
+                    ""type"": ""Button"",
+                    ""id"": ""4c529725-199f-4a05-80c1-843a3fcc31ac"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": ""2D Vector"",
+                    ""id"": ""5c8f5767-3d87-4bc2-962d-e0d392e6d4bd"",
+                    ""path"": ""2DVector"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Movement"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""up"",
+                    ""id"": ""9f063d50-6f21-4cc3-8000-8bf0884229bd"",
+                    ""path"": ""<Keyboard>/w"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Movement"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""down"",
+                    ""id"": ""1a2abb4d-2aae-422d-814d-d7d0e0abeffa"",
+                    ""path"": ""<Keyboard>/s"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Movement"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""left"",
+                    ""id"": ""89b33e8d-f795-417d-89ec-435cce30c98f"",
+                    ""path"": ""<Keyboard>/a"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Movement"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""right"",
+                    ""id"": ""000b739f-ff20-4237-9bac-1d879fccd50a"",
+                    ""path"": ""<Keyboard>/d"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Movement"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""99c4fdc5-6a38-4eb2-95b5-b5569b3b911a"",
+                    ""path"": ""<Gamepad>/leftStick"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Movement"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""dcccd9d9-fb27-4bfd-b98c-2a83edaa6cd9"",
+                    ""path"": ""<Gamepad>/buttonEast"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Quit"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""1c050b21-04ff-44c1-9bf6-5e8537069dbb"",
+                    ""path"": ""<Keyboard>/q"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Quit"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
+        },
+        {
+            ""name"": ""PlayerRight"",
+            ""id"": ""b48d2c2d-8178-4134-9626-62a49861a2bf"",
+            ""actions"": [
+                {
+                    ""name"": ""Movement"",
+                    ""type"": ""Value"",
+                    ""id"": ""29a864dd-5357-44a6-93f4-bc79e90e3107"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": ""Arrow Keys"",
+                    ""id"": ""0c74b477-dbf1-4ea3-abd1-915eb1168c16"",
+                    ""path"": ""2DVector"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Movement"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""up"",
+                    ""id"": ""08de21a9-10ba-4787-9182-af9c91a28d53"",
+                    ""path"": ""<Keyboard>/upArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Movement"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""down"",
+                    ""id"": ""bfffdca7-e5bf-4e25-92fe-2193db1d8fe7"",
+                    ""path"": ""<Keyboard>/downArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Movement"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""left"",
+                    ""id"": ""1f46e19d-5eca-4cb6-9aa6-4dab9ed18f63"",
+                    ""path"": ""<Keyboard>/leftArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Movement"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""right"",
+                    ""id"": ""1f57a8a2-e6ba-4d2c-86e1-001dbac6c7c8"",
+                    ""path"": ""<Keyboard>/rightArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Movement"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""da2a500d-46f7-4fdd-b8b9-245830c46ede"",
+                    ""path"": ""<Gamepad>/rightStick"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Movement"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -176,6 +435,15 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
         m_Player_movement = m_Player.FindAction("movement", throwIfNotFound: true);
         m_Player_look = m_Player.FindAction("look", throwIfNotFound: true);
         m_Player_walls = m_Player.FindAction("walls", throwIfNotFound: true);
+        m_Player_throwAction = m_Player.FindAction("throwAction", throwIfNotFound: true);
+        m_Player_flashLight = m_Player.FindAction("flashLight", throwIfNotFound: true);
+        // PlayerLeft
+        m_PlayerLeft = asset.FindActionMap("PlayerLeft", throwIfNotFound: true);
+        m_PlayerLeft_Movement = m_PlayerLeft.FindAction("Movement", throwIfNotFound: true);
+        m_PlayerLeft_Quit = m_PlayerLeft.FindAction("Quit", throwIfNotFound: true);
+        // PlayerRight
+        m_PlayerRight = asset.FindActionMap("PlayerRight", throwIfNotFound: true);
+        m_PlayerRight_Movement = m_PlayerRight.FindAction("Movement", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -240,6 +508,8 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_movement;
     private readonly InputAction m_Player_look;
     private readonly InputAction m_Player_walls;
+    private readonly InputAction m_Player_throwAction;
+    private readonly InputAction m_Player_flashLight;
     public struct PlayerActions
     {
         private @InputActions m_Wrapper;
@@ -247,6 +517,8 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
         public InputAction @movement => m_Wrapper.m_Player_movement;
         public InputAction @look => m_Wrapper.m_Player_look;
         public InputAction @walls => m_Wrapper.m_Player_walls;
+        public InputAction @throwAction => m_Wrapper.m_Player_throwAction;
+        public InputAction @flashLight => m_Wrapper.m_Player_flashLight;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -265,6 +537,12 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
             @walls.started += instance.OnWalls;
             @walls.performed += instance.OnWalls;
             @walls.canceled += instance.OnWalls;
+            @throwAction.started += instance.OnThrowAction;
+            @throwAction.performed += instance.OnThrowAction;
+            @throwAction.canceled += instance.OnThrowAction;
+            @flashLight.started += instance.OnFlashLight;
+            @flashLight.performed += instance.OnFlashLight;
+            @flashLight.canceled += instance.OnFlashLight;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -278,6 +556,12 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
             @walls.started -= instance.OnWalls;
             @walls.performed -= instance.OnWalls;
             @walls.canceled -= instance.OnWalls;
+            @throwAction.started -= instance.OnThrowAction;
+            @throwAction.performed -= instance.OnThrowAction;
+            @throwAction.canceled -= instance.OnThrowAction;
+            @flashLight.started -= instance.OnFlashLight;
+            @flashLight.performed -= instance.OnFlashLight;
+            @flashLight.canceled -= instance.OnFlashLight;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -295,10 +579,121 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
         }
     }
     public PlayerActions @Player => new PlayerActions(this);
+
+    // PlayerLeft
+    private readonly InputActionMap m_PlayerLeft;
+    private List<IPlayerLeftActions> m_PlayerLeftActionsCallbackInterfaces = new List<IPlayerLeftActions>();
+    private readonly InputAction m_PlayerLeft_Movement;
+    private readonly InputAction m_PlayerLeft_Quit;
+    public struct PlayerLeftActions
+    {
+        private @InputActions m_Wrapper;
+        public PlayerLeftActions(@InputActions wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Movement => m_Wrapper.m_PlayerLeft_Movement;
+        public InputAction @Quit => m_Wrapper.m_PlayerLeft_Quit;
+        public InputActionMap Get() { return m_Wrapper.m_PlayerLeft; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(PlayerLeftActions set) { return set.Get(); }
+        public void AddCallbacks(IPlayerLeftActions instance)
+        {
+            if (instance == null || m_Wrapper.m_PlayerLeftActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_PlayerLeftActionsCallbackInterfaces.Add(instance);
+            @Movement.started += instance.OnMovement;
+            @Movement.performed += instance.OnMovement;
+            @Movement.canceled += instance.OnMovement;
+            @Quit.started += instance.OnQuit;
+            @Quit.performed += instance.OnQuit;
+            @Quit.canceled += instance.OnQuit;
+        }
+
+        private void UnregisterCallbacks(IPlayerLeftActions instance)
+        {
+            @Movement.started -= instance.OnMovement;
+            @Movement.performed -= instance.OnMovement;
+            @Movement.canceled -= instance.OnMovement;
+            @Quit.started -= instance.OnQuit;
+            @Quit.performed -= instance.OnQuit;
+            @Quit.canceled -= instance.OnQuit;
+        }
+
+        public void RemoveCallbacks(IPlayerLeftActions instance)
+        {
+            if (m_Wrapper.m_PlayerLeftActionsCallbackInterfaces.Remove(instance))
+                UnregisterCallbacks(instance);
+        }
+
+        public void SetCallbacks(IPlayerLeftActions instance)
+        {
+            foreach (var item in m_Wrapper.m_PlayerLeftActionsCallbackInterfaces)
+                UnregisterCallbacks(item);
+            m_Wrapper.m_PlayerLeftActionsCallbackInterfaces.Clear();
+            AddCallbacks(instance);
+        }
+    }
+    public PlayerLeftActions @PlayerLeft => new PlayerLeftActions(this);
+
+    // PlayerRight
+    private readonly InputActionMap m_PlayerRight;
+    private List<IPlayerRightActions> m_PlayerRightActionsCallbackInterfaces = new List<IPlayerRightActions>();
+    private readonly InputAction m_PlayerRight_Movement;
+    public struct PlayerRightActions
+    {
+        private @InputActions m_Wrapper;
+        public PlayerRightActions(@InputActions wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Movement => m_Wrapper.m_PlayerRight_Movement;
+        public InputActionMap Get() { return m_Wrapper.m_PlayerRight; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(PlayerRightActions set) { return set.Get(); }
+        public void AddCallbacks(IPlayerRightActions instance)
+        {
+            if (instance == null || m_Wrapper.m_PlayerRightActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_PlayerRightActionsCallbackInterfaces.Add(instance);
+            @Movement.started += instance.OnMovement;
+            @Movement.performed += instance.OnMovement;
+            @Movement.canceled += instance.OnMovement;
+        }
+
+        private void UnregisterCallbacks(IPlayerRightActions instance)
+        {
+            @Movement.started -= instance.OnMovement;
+            @Movement.performed -= instance.OnMovement;
+            @Movement.canceled -= instance.OnMovement;
+        }
+
+        public void RemoveCallbacks(IPlayerRightActions instance)
+        {
+            if (m_Wrapper.m_PlayerRightActionsCallbackInterfaces.Remove(instance))
+                UnregisterCallbacks(instance);
+        }
+
+        public void SetCallbacks(IPlayerRightActions instance)
+        {
+            foreach (var item in m_Wrapper.m_PlayerRightActionsCallbackInterfaces)
+                UnregisterCallbacks(item);
+            m_Wrapper.m_PlayerRightActionsCallbackInterfaces.Clear();
+            AddCallbacks(instance);
+        }
+    }
+    public PlayerRightActions @PlayerRight => new PlayerRightActions(this);
     public interface IPlayerActions
     {
         void OnMovement(InputAction.CallbackContext context);
         void OnLook(InputAction.CallbackContext context);
         void OnWalls(InputAction.CallbackContext context);
+        void OnThrowAction(InputAction.CallbackContext context);
+        void OnFlashLight(InputAction.CallbackContext context);
+    }
+    public interface IPlayerLeftActions
+    {
+        void OnMovement(InputAction.CallbackContext context);
+        void OnQuit(InputAction.CallbackContext context);
+    }
+    public interface IPlayerRightActions
+    {
+        void OnMovement(InputAction.CallbackContext context);
     }
 }
