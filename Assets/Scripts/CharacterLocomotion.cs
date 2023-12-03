@@ -17,6 +17,9 @@ public class CharacterLocomotion : MonoBehaviour
     public float boundaryZMin = 0f;
     public float boundaryZMax = 4.4f;
 
+    public AudioClip walkingSound;
+    public AudioSource audioSource;
+
     void Start()
     {
         animator = GetComponent<Animator>();
@@ -38,6 +41,12 @@ public class CharacterLocomotion : MonoBehaviour
 
         animator.SetFloat("InputX", input.x);
         animator.SetFloat("InputY", input.y);
+
+        if (audioSource != null && walkingSound != null && input.x > 0 && input.y > 0)
+        {
+            audioSource.Stop();
+            audioSource.PlayOneShot(walkingSound);
+        }
 
         // if(Input.GetKeyDown(KeyCode.LeftShift))
         // {

@@ -32,9 +32,30 @@ public class MazeGenerator : MonoBehaviour
     [SerializeField]
     private GameObject winText;
 
+    [SerializeField]
+    private GameObject floor;
+
+    [SerializeField]
+    private Material FloorNightMaterial;
+
+    [SerializeField]
+    private Material FloorDayMaterial;
+
     private MazeCell[,] MazeGrid;
 
     private int RandomCorner;
+
+    private bool night = false;
+
+    private bool fog = false;
+
+    private bool audio = false;
+
+    public AudioClip dayAmbience;
+
+    public AudioClip nightAmbience;
+
+    public AudioSource audioSource;
 
     // Start is called before the first frame update
     IEnumerator Start()
@@ -267,6 +288,140 @@ public class MazeGenerator : MonoBehaviour
             winText.SetActive(false);
         }
 
+        if (Input.GetKeyDown(KeyCode.LeftControl))
+        {
+            Renderer renderer = floor.GetComponent<Renderer>();
+            if (night && !fog)
+            {
+                renderer.material = FloorDayMaterial;
+                for (int i = 0; i < MazeWidth; i++)
+                {
+                    for (int j = 0; j < MazeDepth; j++)
+                    {
+                        MazeGrid[i,j].ChangeToDay();
+                    }
+                }
+                audioSource.Stop();
+                audioSource.PlayOneShot(dayAmbience);
+                night = false;
+            }
+            else if (!night && !fog)
+            {
+                renderer.material = FloorNightMaterial;
+                for (int i = 0; i < MazeWidth; i++)
+                {
+                    for (int j = 0; j < MazeDepth; j++)
+                    {
+                        MazeGrid[i, j].ChangeToNight();
+                    }
+                }
+                audioSource.Stop();
+                audioSource.PlayOneShot(nightAmbience);
+                night = true;
+            }
+            else if (night && fog)
+            {
+                renderer.material = FloorDayMaterial;
+                for (int i = 0; i < MazeWidth; i++)
+                {
+                    for (int j = 0; j < MazeDepth; j++)
+                    {
+                        MazeGrid[i, j].ChangeToDay();
+                        MazeGrid[i, j].AddFogDay();
+                    }
+                }
+                audioSource.Stop();
+                audioSource.PlayOneShot(dayAmbience);
+                night = false;
+            }
+            else if (!night && fog)
+            {
+                renderer.material = FloorDayMaterial;
+                for (int i = 0; i < MazeWidth; i++)
+                {
+                    for (int j = 0; j < MazeDepth; j++)
+                    {
+                        MazeGrid[i, j].ChangeToNight();
+                        MazeGrid[i, j].AddFogNight();
+                    }
+                }
+                audioSource.Stop();
+                audioSource.PlayOneShot(nightAmbience);
+                night = true;
+            }
+        }
+
+        if (Input.GetKeyDown(KeyCode.LeftAlt))
+        {
+            if (fog)
+            {
+                for (int i = 0; i < MazeWidth; i++)
+                {
+                    for (int j = 0; j < MazeDepth; j++)
+                    {
+                        MazeGrid[i, j].RemoveFog();
+                    }
+                }
+                audioSource.volume = audioSource.volume * 2f;
+                fog = false;
+            }
+            else if (night && !fog)
+            {
+                for (int i = 0; i < MazeWidth; i++)
+                {
+                    for (int j = 0; j < MazeDepth; j++)
+                    {
+                        MazeGrid[i, j].AddFogNight();
+                    }
+                }
+                audioSource.volume = audioSource.volume * 0.5f;
+                fog = true;
+            }
+            else if (!night && !fog)
+            {
+                for (int i = 0; i < MazeWidth; i++)
+                {
+                    for (int j = 0; j < MazeDepth; j++)
+                    {
+                        MazeGrid[i, j].AddFogDay();
+                    }
+                }
+                audioSource.volume = audioSource.volume * 0.5f;
+                fog = true;
+            }
+        }
+
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
+            if (audio)
+            {
+                audioSource.Stop();
+                audio = false;
+            }
+            else
+            {
+                if (night && !fog)
+                {
+                    audioSource.PlayOneShot(nightAmbience);
+                }
+                else if (!night && !fog)
+                {
+                    audioSource.PlayOneShot(dayAmbience);
+                }
+                else if (night && fog)
+                {
+                    audioSource.PlayOneShot(nightAmbience);
+                    audioSource.volume = audioSource.volume * 0.5f;
+                }
+                else if (!night && fog)
+                {
+                    audioSource.PlayOneShot(dayAmbience);
+                    audioSource.volume = audioSource.volume * 0.5f;
+                }
+                audio = true;
+            }
+        }
+
         if (RandomCorner == 0)
         {
             if (player.transform.position.x > MazeWidth - 1.6f && player.transform.position.z > MazeDepth - 1.6f)
@@ -295,5 +450,7 @@ public class MazeGenerator : MonoBehaviour
                 winText.SetActive(true);
             }
         }
+
+        audioSource.volume = 1 - ((player.transform.position.x + player.transform.position.z) - (enemy.transform.position.x + enemy.transform.position.z))/10f;
     }
 }
