@@ -41,6 +41,12 @@ public class MazeGenerator : MonoBehaviour
     [SerializeField]
     private Material FloorDayMaterial;
 
+    [SerializeField]
+    private GameObject loadButton;
+
+    [SerializeField]
+    private GameObject saveButton;
+
     private MazeCell[,] MazeGrid;
 
     private int RandomCorner;
@@ -123,6 +129,10 @@ public class MazeGenerator : MonoBehaviour
         enemy.transform.position = MazeGrid[MazeWidth / 2, MazeDepth / 2].transform.position;
 
         enemy.SetActive(true);
+
+        saveButton.SetActive(true);
+
+        loadButton.SetActive(true);
 
         loadText.SetActive(false);
 

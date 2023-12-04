@@ -4,6 +4,8 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using TMPro;
+using System.IO;
+using System.Runtime.Serialization.Formatters.Binary;
 public class GameManager : MonoBehaviour
 {
     private static bool initializedFromMiniGame = false;
@@ -27,6 +29,22 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance;
 
     public GameObject magicDoor;
+
+    [System.Serializable]
+    [SerializeField]
+    class GameData
+    {
+        public float playerPositionX;
+        public float playerPositionY;
+        public float playerPositionZ;
+        public float enemyPositionX;
+        public float enemyPositionY;
+        public float enemyPositionZ;
+        public int playerScore;
+        public int enemyScore;
+    };
+
+    const string fileName = "/gameData.dat";
 
     void Awake()
     {
@@ -202,4 +220,35 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public void LoadState()
+    {
+        if(File.Exists(Application.persistentDataPath + fileName))
+        {
+            BinaryFormatter bf = new BinaryFormatter();
+            FileStream fs = File.Open(Application.persistentDataPath + fileName, FileMode.Open, FileAccess.Read);
+            GameData data = (GameData)bf.Deserialize(fs);
+            fs.Close();
+            playerScore = data.playerScore;
+            enemyScore = data.enemyScore;
+            player.transform.position = new Vector3(data.playerPositionX, data.playerPositionY, data.playerPositionZ);
+            enemy.transform.position = new Vector3(data.enemyPositionX, data.enemyPositionY, data.enemyPositionZ);
+        }
+    }
+
+    public void SaveState()
+    {
+        BinaryFormatter bf = new BinaryFormatter();
+        FileStream fs = File.Open(Application.persistentDataPath + fileName, FileMode.OpenOrCreate, FileAccess.Write);
+        GameData data = new GameData();
+        data.playerPositionX = player.transform.position.x;
+        data.playerPositionY = player.transform.position.y;
+        data.playerPositionZ = player.transform.position.z;
+        data.enemyPositionX = enemy.transform.position.x;
+        data.enemyPositionY = enemy.transform.position.y;
+        data.enemyPositionZ = enemy.transform.position.z;
+        data.playerScore = playerScore;
+        data.enemyScore = enemyScore;
+        bf.Serialize(fs, data);
+        fs.Close();
+    }
 }

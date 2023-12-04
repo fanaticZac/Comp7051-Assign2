@@ -9,7 +9,7 @@ public class CollisionDetector : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.collider.name == "Player")
+        if (collision.collider.name == "Player" && audioSource != null)
         {
             audioSource.PlayOneShot(collisionSound);
         }
