@@ -249,5 +249,8 @@ public class GameManager : MonoBehaviour
         data.enemyScore = enemyScore;
         bf.Serialize(fs, data);
         fs.Close();
+
+        UpdatePlayerScoreUI();
+        UpdateEnemyScoreUI();
     }
 }
