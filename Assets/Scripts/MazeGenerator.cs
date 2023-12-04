@@ -403,7 +403,7 @@ public class MazeGenerator : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.E))
         {
-            if (audio)
+            if (audio && audioSource != null)
             {
                 audioSource.Stop();
                 audio = false;

@@ -53,11 +53,6 @@ public class GameManager : MonoBehaviour
             Instance = this;
             DontDestroyOnLoad(gameObject);
         }
-        else
-        {
-            Destroy(gameObject);
-        }
-
         SetMagicDoorLocation();
 
     }
@@ -150,6 +145,10 @@ public class GameManager : MonoBehaviour
 
     public void RestartGame()
     {
+        if (audioSource != null)
+        {
+            audioSource.Stop();
+        }
         // GAME OVER 
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
